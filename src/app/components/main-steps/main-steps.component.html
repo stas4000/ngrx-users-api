@@ -1,0 +1,39 @@
+<p-steps [model]="items" [readonly]="false" [activeIndex]="step$ | async"></p-steps>
+
+<ng-container *ngIf="(step$ | async) == 0">
+  <div class="user-cards" *ngIf="userApiData">
+    <p-dataView #dv [value]="userApiData.data" [paginator]="true" [rows]="3" layout="grid">
+      <ng-template let-user pTemplate="gridItem">
+        <div class="col-3 align-center">
+          <div class="product-grid-item card">
+            <div class="product-grid-item-top" style="justify-content: center;">
+              <div>
+                <i class="pi pi-tag product-category-icon"></i>
+                <span class="product-category">{{user.email}}</span>
+              </div>
+            </div>
+            <div class="product-grid-item-content">
+              <div class="product-name">{{user.first_name}}</div>
+              <div class="product-description">{{user.last_name}}</div>
+            </div>
+            <div class="product-grid-item-bottom" style="justify-content: center;">
+              <button pButton type="button" label="Select" (click)="saveSelectedToStore(user)"></button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="(step$ | async) == 1">
+  <app-nested-step></app-nested-step>
+</ng-container>
+
+
+
+<div class="buttons">
+  <button pButton type="button" label="Back" (click)="stepDown()"></button>
+  <button pButton type="button" label="Next" (click)="stepUp()"></button>
+</div>
+<div>Current Count: {{ step$ | async }}</div>
