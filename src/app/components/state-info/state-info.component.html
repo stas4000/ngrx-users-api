@@ -1,3 +1,10 @@
 <h3>State Info Page (Different Module)</h3>
-<div>Current Count: {{ step$ | async }}</div>
+<div>Steps Count: {{ step$ | async }}</div>
+<div *ngIf="user">User First Name: {{ user.first_name }}</div>
+<div *ngIf="user">User Last Name: {{ user.last_name }}</div>
 <div *ngIf="user">User Email: {{ user.email }}</div>
+<div>
+  <p>Avatar:</p>
+  <img *ngIf="user" alt="Avatar" class="images" [src]="user.avatar"/>
+</div>
+
